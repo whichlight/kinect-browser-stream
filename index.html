@@ -1,0 +1,10 @@
+<html>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  var socket = io.connect('http://localhost');
+  console.log('socketio');
+  socket.on('kinect', function (data) {
+    console.log(data);
+  });
+</script>
+</html>
