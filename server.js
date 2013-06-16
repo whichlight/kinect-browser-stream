@@ -44,18 +44,13 @@ deferred.resolve(kinect());
 deferred.done(function (kcontext) {
   kcontext.resume();
   kcontext.start('video');
-  kcontext.on('video', function (buf) {
-    eventEmitter.emit('buf', buf);
-  });
 
   wss.on('connection', function(ws) {
     var stream = websocket(ws);
     console.log(stream);
     console.log("connection made");
-    eventEmitter.on('buf', function (buf) {
-      var readStream = fs.createReadStream(buf);
-      readStream.pipe(stream);
-      //stream.emit('kinect', {data : buf});
+    kcontext.on('video', function (buf) {
+        buf.pipe(stream);
     });
   });
 });
