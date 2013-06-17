@@ -1,14 +1,13 @@
 var app = require('http').createServer(handler).listen(3000)
 , fs = require('fs')
+, stream = require('stream')
 , kinect = require('kinect')
-, step = require('step')
-, events = require('events')
+, BufferStream = require('bufferstream')
 , $ = require('jquery')
 , WebSocketServer = require('ws').Server
 , websocket = require('websocket-stream')
 , wss = new WebSocketServer({server: app});
 
-var eventEmitter = new events.EventEmitter();
 var deferred = $.Deferred();
 
 function handler (req, res) {
@@ -38,20 +37,34 @@ function handler (req, res) {
 }
 
 
-
 deferred.resolve(kinect());
+
+kstream = new BufferStream();
+
+kstream.on('error', function(err){
+    console.log('stream kinect error');
+    console.log(err);
+});
+
+kstream.on('data', function(data){
+
+});
+
+
 
 deferred.done(function (kcontext) {
   kcontext.resume();
   kcontext.start('video');
-
   wss.on('connection', function(ws) {
     var stream = websocket(ws);
-    console.log(stream);
+    kstream.pipe(stream);
     console.log("connection made");
     kcontext.on('video', function (buf) {
-        buf.pipe(stream);
+        kstream.write(buf);
     });
+  });
+  wss.on('error', function(ws) {
+    console.log('error');
   });
 });
 
