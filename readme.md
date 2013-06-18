@@ -17,10 +17,12 @@ Installation
 Plug in the kinect and then run
 
 >node server.js
+
 Then open up a browser on localhost:3000
 
 bundle.js is generated with browserify:
-browserify client.js > bundle.js
+
+>browserify client.js > bundle.js
 
 get in touch on twitter at @whichlight
 my other projects are on whichlight.com
