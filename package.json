@@ -1,0 +1,36 @@
+{
+  "name": "kinect-browser-stream",
+  "version": "0.0.0",
+  "description": "kinect to browser with nodejs streams and canvas",
+  "main": "server.js",
+  "dependencies": {
+    "bufferstream": "~0.5.1",
+    "jquery": "~1.8.3",
+    "kinect": "~0.1.7",
+    "buffer-stream": "~0.0.1",
+    "connect": "~2.7.11",
+    "browserify": "~2.18.1",
+    "socket.io": "~0.9.16",
+    "websocket-stream": "~0.1.0",
+    "ws": "~0.4.25",
+    "step": "~0.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/whichlight/kinect-browser-stream.git"
+  },
+  "keywords": [
+    "kinect"
+  ],
+  "author": "whichlight",
+  "license": "BSD",
+  "gitHead": "bac82b7cb7782fed2d8f8a2216bb45db52a59ef4",
+  "bugs": {
+    "url": "https://github.com/whichlight/kinect-browser-stream/issues"
+  }
+}

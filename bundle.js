@@ -12,11 +12,9 @@ var bytearray;
 var ctx = document.getElementById('canvas').getContext('2d');
 
 socket.on('data', function (data) {
-
-  bytearray = new Uint8Array(data);
+  var bytearray = new Uint8Array(data);
   var imgdata = ctx.getImageData(0,0, width, height);
   var imgdatalen = imgdata.data.length;
-
   var offset=0;
   for(var i=0;i<imgdatalen/4;i++){
     imgdata.data[4*i+offset] = bytearray[3*i];
