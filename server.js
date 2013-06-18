@@ -31,30 +31,29 @@ function handler (req, res) {
   }
 }
 
-
-
-kstream = new BufferStream();
-
-kstream.on('error', function(err){
-  console.log('stream kinect error');
-  console.log(err);
-});
-
 var kcontext = kinect();
 
 kcontext.resume();
+
 kcontext.start('video');
+
+var kstream = new BufferStream();
+
+kcontext.on('video', function (buf) {
+  kstream.write(buf);
+});
+
 
 wss.on('connection', function(ws) {
   var stream = websocket(ws);
   kstream.pipe(stream);
   console.log("connection made");
-  kcontext.on('video', function (buf) {
-    kstream.write(buf);
+  ws.on('close', function() {
+    stream.writable=false;
+    console.log('closed socket');
   });
+
 });
 
-wss.on('error', function(ws) {
-  console.log('error');
-});
+
 
