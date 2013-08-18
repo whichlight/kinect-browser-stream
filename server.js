@@ -35,11 +35,11 @@ var kcontext = kinect();
 
 kcontext.resume();
 
-kcontext.start('video');
+kcontext.start('depth');
 
 var kstream = new BufferStream();
 
-kcontext.on('video', function (buf) {
+kcontext.on('depth', function (buf) {
   kstream.write(buf);
 });
 
